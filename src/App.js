@@ -1,5 +1,6 @@
 // import logo from './logo.svg';
 // import './App.css';
+import About from './components/About';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 
@@ -14,7 +15,7 @@ function App() {
         <TextForm heading="Enter the text for analysis below"/>
       </div>
       
-
+      <About/>
     </>
   );
 }
