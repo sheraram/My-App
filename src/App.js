@@ -5,6 +5,12 @@ import About from './components/About';
 import Alert from './components/Alert';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+
 
 function App() {
   const [mode, setMode] = useState('light');
@@ -42,19 +48,33 @@ function App() {
 
   return (
     <>
-      <Navbar title="My App" mode={mode} toggleMode={toggleMode}/>
-      
-      <div className="container my-3"><Alert alert={alert}/></div>
-      
-      <div className="container my-3">
-        <TextForm heading="Enter the text for analysis below" textalert={showalert} mode={mode}/>
-      </div>
-      
-      <About mode={mode}/>
+      <Router> 
+        <Navbar title="My App" mode={mode} toggleMode={toggleMode}/>
+        
+        <div className="container my-3"><Alert alert={alert}/></div>
+        <Switch>
+          <Route exact path="/about">
+            <About mode={mode}/>
+          </Route>
+          
+          <Route exact path="/">
+            <div className="container my-3">
+              <TextForm heading="Enter the text for analysis below" textalert={showalert} mode={mode}/>
+            </div>
+          </Route>
+        </Switch>
 
-      
+       
+        
+        
+
+      </Router>
     </>
   );
 }
 
 export default App;
+
+// React matches partial path
+// for exact match use 'exact'
+// used above to match { <Route exact path="/about"> }
