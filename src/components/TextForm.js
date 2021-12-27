@@ -42,6 +42,15 @@ export default function TextForm(props) {
 
     const [text, setText] = useState('Enter text Here');
     // setText("new text");
+
+    const countwords=(word)=>{
+        const newtext=word.trim().split("\n");
+        const newtext1=newtext.join(" ");
+        const newtext2=newtext1.split(/[ ]+/);
+        // console.log(newtext2);
+        return word.length===0?0:newtext2.length;
+    }
+
     return (        
         <>
             <div className='container' style={{color : props.mode==='light'?'#042743':'white' }}>
@@ -58,8 +67,8 @@ export default function TextForm(props) {
             </div>
             <div className="container my-3" style={{color : props.mode==='light'?'#042743':'white' }}>
                 <h1>Your Text summary</h1>
-                <p>You type {text.split(" ").length} words and {text.length} characters</p>
-                <p>to read take {0.008 * text.split(" ").length} minutes</p>
+                <p>You type {countwords(text)} words and {text.length} characters</p>
+                <p>to read take {0.008 * countwords(text)} minutes</p>
 
                 <h2>Preview</h2>
                 <p>{text}</p>
