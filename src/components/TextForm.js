@@ -23,10 +23,15 @@ export default function TextForm(props) {
     }
 
     const handleCopyClick= ()=>{
+        // method 1 to copy text via selecting
         var text=document.getElementById("MyBox");
         text.select();
         navigator.clipboard.writeText(text.value);
         document.getSelection().removeAllRanges();
+
+        // method 2 to copy text without selecting text
+        navigator.clipboard.writeText(text);
+        
         props.textalert("Copied to Clipboard","success");
     }
 
