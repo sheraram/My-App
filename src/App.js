@@ -25,11 +25,18 @@ function App() {
       setMode('dark');
       document.body.style.backgroundColor='#042743';
       showalert("Dark Mode enabled", "success");
+      document.title="My-App- Dark Mode";
+
+      // 2 second alert message on title
+      // setInterval(() => {
+      //   document.title="Install this app";
+      // }, 2000);
     }
     else{
       setMode('light');
       document.body.style.backgroundColor='white';
       showalert("Light Mode enabled", "success");
+      document.title="My App-Light mode";
     }
   }
 
