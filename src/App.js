@@ -31,7 +31,7 @@ function App() {
       setMode('dark');
       document.body.style.backgroundColor='#042743';
       showalert("Dark Mode enabled", "success");
-      document.title="My-App- Dark Mode";
+      // document.title="My-App- Dark Mode";
 
       // 2 second alert message on title
       // setInterval(() => {
@@ -42,7 +42,7 @@ function App() {
       setMode('light');
       document.body.style.backgroundColor='white';
       showalert("Light Mode enabled", "success");
-      document.title="My App-Light mode";
+      // document.title="My App-Light mode";
     }
   }
 
@@ -59,15 +59,10 @@ function App() {
           
           <Route exact path="/">
             <div className="container my-3">
-              <TextForm heading="Enter the text for analysis below" textalert={showalert} mode={mode}/>
+              <TextForm heading="Try My-App - word counter, character counter, remove extra spaces" textalert={showalert} mode={mode}/>
             </div>
           </Route>
         </Switch>
-
-       
-        
-        
-
       </Router>
     </>
   );

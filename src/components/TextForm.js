@@ -19,13 +19,14 @@ export default function TextForm(props) {
         // console.log("LowerCase was cliicked" + text);
         let newText='';
         setText(newText);
-        props.textalert("Clear the text","success");
+        props.textalert("Text area Cleared","success");
     }
 
     const handleCopyClick= ()=>{
         var text=document.getElementById("MyBox");
         text.select();
         navigator.clipboard.writeText(text.value);
+        document.getSelection().removeAllRanges();
         props.textalert("Copied to Clipboard","success");
     }
 
@@ -40,7 +41,7 @@ export default function TextForm(props) {
         setText(event.target.value);
     }
 
-    const [text, setText] = useState('Enter text Here');
+    const [text, setText] = useState('');
     // setText("new text");
 
     const countwords=(word)=>{
@@ -54,24 +55,25 @@ export default function TextForm(props) {
     return (        
         <>
             <div className='container' style={{color : props.mode==='light'?'#042743':'white' }}>
-                <h1>{props.heading}</h1>
+                <h1 className='mb-3'>{props.heading}</h1>
                 <div className="mb-3">
                 <textarea className="form-control" style={{backgroundColor : props.mode==='light'?'gray':'white', color : props.mode==='light'?'white':'#042743' }} value={text} onChange={handleOnChange} id="MyBox" rows="8"></textarea>
                 </div>
 
-                <button className="btn btn-outline-success mx-2 " onClick={handleUpClick}>Convert to Uppercase</button>
-                <button className="btn btn-outline-success mx-2" onClick={handleLowerClick}>Convert to Lowercase</button>
-                <button className="btn btn-outline-success mx-2" onClick={handleClearClick}>Clear Text</button>
-                <button className="btn btn-outline-success mx-2" onClick={handleCopyClick}>Copy Text</button>
-                <button className="btn btn-outline-success mx-2" onClick={handlefontClick}>Remove extra Spaces</button>
+                <button disabled={text.length===0} className="btn btn-outline-success mx-2 my-1" onClick={handleUpClick}>Convert to Uppercase</button>
+                <button disabled={text.length===0} className="btn btn-outline-success mx-2 my-1" onClick={handleLowerClick}>Convert to Lowercase</button>
+                <button disabled={text.length===0} className="btn btn-outline-success mx-2 my-1" onClick={handleClearClick}>Clear Text</button>
+                <button disabled={text.length===0} className="btn btn-outline-success mx-2 my-1" onClick={handleCopyClick}>Copy Text</button>
+                <button disabled={text.length===0} className="btn btn-outline-success mx-2 my-1" onClick={handlefontClick}>Remove extra Spaces</button>
             </div>
             <div className="container my-3" style={{color : props.mode==='light'?'#042743':'white' }}>
                 <h1>Your Text summary</h1>
                 <p>You type {countwords(text)} words and {text.length} characters</p>
-                <p>to read take {0.008 * countwords(text)} minutes</p>
+                <p>You type {text.split(" ").filter((element)=>{return element.length!==0}).length}</p> {/* this more correct than below one */} 
+                {/* <p>to read take {0.008 * countwords(text)} minutes</p> */}
 
                 <h2>Preview</h2>
-                <p>{text}</p>
+                <p>{text.length>0?text:'Nothing to preview'}</p>
             </div>
         </>
     )
